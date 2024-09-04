@@ -1,1 +1,1 @@
-A cosmetics e-commerce system built using java with springboot, JPA, MySQL and Lombok 
+A cosmetics e-commerce system built using JAVA with springboot, JPA, MySQL and Lombok 
