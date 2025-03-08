@@ -24,6 +24,7 @@ public class Client {
     private String password;
     private String email;
     private LocalDate birth_date;
+    //private Adress adress;
 
     public Client(ClientRequestDTO data) {
        this.name_client = data.name_client();
