@@ -1,6 +1,6 @@
 package com.bsf.e_commerce.Client;
 
-import com.bsf.e_commerce.product.ProductRequestDTO;
+import com.bsf.e_commerce.Address.Address;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +25,10 @@ public class Client {
     private String email;
     private LocalDate birth_date;
 
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+    private Address address;
+
+
     public Client(ClientRequestDTO data) {
        this.name_client = data.name_client();
        this.cpf = data.cpf();
@@ -33,6 +37,11 @@ public class Client {
        this.email = data.email();
        this.birth_date = data.birth_date();
        this.balance = data.balance();
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+        address.setClient(this);
     }
 }
 

@@ -17,10 +17,12 @@ public class Product {
     private String id_product;
     private String name_product;
     private BigDecimal price;
+    private int stack_quant;
 
     public Product(ProductRequestDTO data) {
         this.name_product = data.name_product();
         this.price = data.price();
+        this.stack_quant = data.stack_quant();
     }
 }
 
