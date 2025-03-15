@@ -32,14 +32,14 @@ public class ClientController {
     }
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
-    public List<ClientResponseDTO> getAll(){
+    public ResponseEntity<List<ClientResponseDTO>> getAll(){
         List<ClientResponseDTO> clients = repository.findAll().stream().map(ClientResponseDTO::new).collect(Collectors.toList());;
-        return clients;
+        return ResponseEntity.ok(clients);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PutMapping("/{id_client}")
-    public void updateClient(@PathVariable String id_client, @RequestBody ClientRequestDTO data) {
+    public ResponseEntity<String> updateClient(@PathVariable String id_client, @RequestBody ClientRequestDTO data) {
 
         Client client = repository.findById(id_client).orElseThrow(() -> new RuntimeException("Client not found"));
 
@@ -53,6 +53,8 @@ public class ClientController {
 
 
         repository.save(client);
+        return ResponseEntity.status(HttpStatus.CREATED).body(client.getUsername() + " updated successfully");
+
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
