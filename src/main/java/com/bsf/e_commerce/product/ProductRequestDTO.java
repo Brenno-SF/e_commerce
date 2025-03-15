@@ -2,5 +2,5 @@ package com.bsf.e_commerce.product;
 
 import java.math.BigDecimal;
 
-public record ProductRequestDTO(String name_product, BigDecimal price) {
+public record ProductRequestDTO(String name_product, BigDecimal price, int stack_quant) {
 }

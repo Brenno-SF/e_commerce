@@ -1,12 +1,10 @@
 package com.bsf.e_commerce.controller;
 
+import com.bsf.e_commerce.Address.Address;
 import com.bsf.e_commerce.Client.Client;
 import com.bsf.e_commerce.Client.ClientRepository;
 import com.bsf.e_commerce.Client.ClientRequestDTO;
 import com.bsf.e_commerce.Client.ClientResponseDTO;
-import com.bsf.e_commerce.product.Product;
-import com.bsf.e_commerce.product.ProductRequestDTO;
-import com.bsf.e_commerce.product.ProductResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +19,12 @@ public class ClientController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
-    public void saveProduct(@RequestBody ClientRequestDTO data) {
+    public void saveClient(@RequestBody ClientRequestDTO data) {
         Client clientData = new Client(data);
+        Address address = new Address(data.address());
+
+        clientData.setAddress(address);
+
         repository.save(clientData);
         return;
     }
