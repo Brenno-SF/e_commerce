@@ -6,6 +6,8 @@ import com.bsf.e_commerce.Client.ClientRepository;
 import com.bsf.e_commerce.Client.ClientRequestDTO;
 import com.bsf.e_commerce.Client.ClientResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,14 +21,14 @@ public class ClientController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
-    public void saveClient(@RequestBody ClientRequestDTO data) {
+    public ResponseEntity<String> saveClient(@RequestBody ClientRequestDTO data) {
         Client clientData = new Client(data);
         Address address = new Address(data.address());
 
         clientData.setAddress(address);
 
         repository.save(clientData);
-        return;
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientData.getUsername() + " saved successfully");
     }
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
@@ -55,11 +57,12 @@ public class ClientController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/{id_client}")
-    public void deleteClient(@PathVariable("id_client") String id) {
-        Client client = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found with ID: " + id));
+    public ResponseEntity<String> deleteClient(@PathVariable("id_client") String id) {
+        Client client = repository.findById(id).orElseThrow(() -> new RuntimeException("Client not found with ID: " + id));
 
         repository.delete(client);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(client.getUsername() + " deleted successfully");
     }
 
 }
