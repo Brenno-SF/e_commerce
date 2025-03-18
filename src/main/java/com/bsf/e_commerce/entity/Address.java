@@ -1,5 +1,5 @@
-package com.bsf.e_commerce.Address;
-import com.bsf.e_commerce.Client.Client;
+package com.bsf.e_commerce.entity;
+import com.bsf.e_commerce.request.AddressResponseDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,7 +29,7 @@ public class Address {
     @JsonIgnore
     private Client client;
 
-    public Address(AddressRequestDTO data) {
+    public Address(AddressResponseDTO data) {
         this.street = data.street();
         this.neighborhood = data.neighborhood();
         this.zip_code = data.zip_code();

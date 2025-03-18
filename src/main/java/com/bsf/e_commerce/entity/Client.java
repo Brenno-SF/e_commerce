@@ -1,6 +1,6 @@
-package com.bsf.e_commerce.Client;
+package com.bsf.e_commerce.entity;
 
-import com.bsf.e_commerce.Address.Address;
+import com.bsf.e_commerce.request.ClientRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

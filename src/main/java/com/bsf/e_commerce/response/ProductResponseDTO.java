@@ -1,4 +1,6 @@
-package com.bsf.e_commerce.product;
+package com.bsf.e_commerce.response;
+
+import com.bsf.e_commerce.entity.Product;
 
 import java.math.BigDecimal;
 

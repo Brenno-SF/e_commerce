@@ -1,4 +1,4 @@
-package com.bsf.e_commerce.Buy;
+package com.bsf.e_commerce.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

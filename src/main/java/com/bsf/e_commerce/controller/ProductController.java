@@ -1,9 +1,9 @@
 package com.bsf.e_commerce.controller;
 
-import com.bsf.e_commerce.product.Product;
-import com.bsf.e_commerce.product.ProductRepository;
-import com.bsf.e_commerce.product.ProductRequestDTO;
-import com.bsf.e_commerce.product.ProductResponseDTO;
+import com.bsf.e_commerce.request.ProductRequestDTO;
+import com.bsf.e_commerce.entity.Product;
+import com.bsf.e_commerce.repository.ProductRepository;
+import com.bsf.e_commerce.response.ProductResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,10 +1,10 @@
 package com.bsf.e_commerce.controller;
 
-import com.bsf.e_commerce.Address.Address;
-import com.bsf.e_commerce.Client.Client;
-import com.bsf.e_commerce.Client.ClientRepository;
-import com.bsf.e_commerce.Client.ClientRequestDTO;
-import com.bsf.e_commerce.Client.ClientResponseDTO;
+import com.bsf.e_commerce.entity.Address;
+import com.bsf.e_commerce.entity.Client;
+import com.bsf.e_commerce.repository.ClientRepository;
+import com.bsf.e_commerce.request.ClientRequestDTO;
+import com.bsf.e_commerce.response.ClientResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

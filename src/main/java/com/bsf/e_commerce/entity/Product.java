@@ -1,4 +1,4 @@
-package com.bsf.e_commerce.product;
+package com.bsf.e_commerce.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +19,7 @@ public class Product {
     private BigDecimal price;
     private int stack_quant;
 
-    public Product(ProductRequestDTO data) {
+    public Product(com.bsf.e_commerce.request.product.ProductRequestDTO data) {
         this.name_product = data.name_product();
         this.price = data.price();
         this.stack_quant = data.stack_quant();

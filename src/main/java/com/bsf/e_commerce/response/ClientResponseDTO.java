@@ -1,6 +1,7 @@
-package com.bsf.e_commerce.Client;
+package com.bsf.e_commerce.response;
 
-import com.bsf.e_commerce.Address.Address;
+import com.bsf.e_commerce.entity.Address;
+import com.bsf.e_commerce.entity.Client;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
