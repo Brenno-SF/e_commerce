@@ -1,8 +1,11 @@
 package com.bsf.e_commerce.entity;
 
 import com.bsf.e_commerce.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,10 +27,11 @@ public class Order {
 
     @OneToMany
     @JoinColumn(name = "fk_cart")
+    @JsonIgnore
     private List<Cart> cartItems;
 
     @Column(nullable = false)
-    private Double total_price;
+    private BigDecimal total_price;
 
 
     private String payment_method;

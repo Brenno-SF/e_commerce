@@ -3,6 +3,8 @@ package com.bsf.e_commerce.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Table(name = "cart")
 @Entity(name = "cart")
 @Getter
@@ -13,8 +15,15 @@ import lombok.*;
 public class Cart {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private String id_cart;
-    private String fk_client;
-    private String fk_product;
-    private String added_at;
+
+    @ManyToOne
+    @JoinColumn(name="fk_client", nullable = false)
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name="fk_product",nullable = false)
+    private Product product;
+
+    private LocalDateTime added_at;
     private int quantity;
 }
