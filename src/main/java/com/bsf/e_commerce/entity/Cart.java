@@ -10,13 +10,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id_cart")
-
 public class Cart {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private String id_cart;
     private String fk_client;
     private String fk_product;
-    private String buy_date;
+    private String added_at;
     private int quantity;
-
 }
