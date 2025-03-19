@@ -1,5 +1,5 @@
 package com.bsf.e_commerce.entity;
-import com.bsf.e_commerce.request.AddressResponseDTO;
+import com.bsf.e_commerce.response.AddressResponseDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;

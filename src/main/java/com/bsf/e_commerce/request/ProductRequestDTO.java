@@ -1,4 +1,4 @@
-package com.bsf.e_commerce.request.product;
+package com.bsf.e_commerce.request;
 
 import java.math.BigDecimal;
 

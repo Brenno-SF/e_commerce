@@ -1,4 +1,4 @@
-package com.bsf.e_commerce.request;
+package com.bsf.e_commerce.response;
 
 public record AddressResponseDTO(String street,
                                  String neighborhood,
