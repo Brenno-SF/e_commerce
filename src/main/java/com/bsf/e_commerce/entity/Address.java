@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-@Table(name = "adress")
+@Table(name = "adress")//mudar isso no banco de dados
 @Entity
 @Getter
 @Setter
