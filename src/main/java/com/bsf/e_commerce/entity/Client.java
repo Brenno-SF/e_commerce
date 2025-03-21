@@ -13,10 +13,10 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id_client")
+@EqualsAndHashCode(of = "idClient")
 public class Client {
-    @Id @GeneratedValue(strategy = GenerationType.UUID)
-    private String id_client;
+    @Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "id_client")
+    private String idClient;
     private String name_client;
     private String cpf;
     private BigDecimal balance;
