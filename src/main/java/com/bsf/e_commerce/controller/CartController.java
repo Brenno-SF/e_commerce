@@ -38,15 +38,15 @@ public class CartController {
     @GetMapping("/{fk_client}")
     public ResponseEntity<List<CartResponseDTO>> getByIdClient(@PathVariable String fk_client){
         List<CartResponseDTO> cart = cartRepository.findByClientId(fk_client);
+
         return ResponseEntity.ok(cart);
     }
+
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     public ResponseEntity<String> saveCart(@RequestBody CartRequestDTO data){
-        Client client = clientRepository.findById(data.client().getIdClient())
-                .orElseThrow(() -> new RuntimeException("Client not found"));
-        Product product = productRepository.findById(data.product().getId_product())
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+        Client client = clientRepository.findById(data.client().getIdClient()).orElseThrow(() -> new RuntimeException("Client not found"));
+        Product product = productRepository.findById(data.product().getId_product()).orElseThrow(() -> new RuntimeException("Product not found"));
 
         Cart cart = new Cart();
         cart.setClient(client);
@@ -56,6 +56,14 @@ public class CartController {
         cartRepository.save(cart);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cart + " saved successfully");
+    }
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @DeleteMapping("/{id_cart}")
+    public ResponseEntity<String> deleteClient(@PathVariable("id_cart") String id) {
+        Cart cart = cartRepository.findById(id).orElseThrow(() -> new RuntimeException("Cart not found with ID: " + id));
 
+        cartRepository.delete(cart);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(cart.getProduct().getName_product() + " deleted successfully");
     }
 }
