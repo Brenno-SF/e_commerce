@@ -7,6 +7,7 @@ import com.bsf.e_commerce.repository.CartRepository;
 import com.bsf.e_commerce.repository.ClientRepository;
 import com.bsf.e_commerce.repository.ProductRepository;
 import com.bsf.e_commerce.request.CartRequestDTO;
+import com.bsf.e_commerce.request.ClientRequestDTO;
 import com.bsf.e_commerce.response.CartResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +58,20 @@ public class CartController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cart + " saved successfully");
     }
+
+//    @CrossOrigin(origins = "*", allowedHeaders = "*")
+//    @PutMapping("/{id_cart}")
+//    public ResponseEntity<String> updateClient(@PathVariable String id_cart, @RequestBody ClientRequestDTO data) {
+//
+//        Cart cart = cartRepository.findById(id_cart).orElseThrow(() -> new RuntimeException("Client not found"));
+//
+//        cart.;
+//
+//        cartRepository.save(cart);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(cart.getProduct().getName_product() + " updated successfully");
+//
+//    }
+
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/{id_cart}")
     public ResponseEntity<String> deleteClient(@PathVariable("id_cart") String id) {
@@ -64,6 +79,6 @@ public class CartController {
 
         cartRepository.delete(cart);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(cart.getProduct().getName_product() + " deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(cart.getProduct().getName_product() + " deleted successfully");
     }
 }

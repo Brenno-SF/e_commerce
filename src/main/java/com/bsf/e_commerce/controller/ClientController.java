@@ -64,7 +64,7 @@ public class ClientController {
 
         repository.delete(client);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(client.getUsername() + " deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(client.getUsername() + " deleted successfully");
     }
 
 }
