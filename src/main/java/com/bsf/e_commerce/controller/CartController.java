@@ -73,12 +73,21 @@ public class CartController {
 //    }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @DeleteMapping("/{id_cart}")
-    public ResponseEntity<String> deleteClient(@PathVariable("id_cart") String id) {
+    @DeleteMapping("item/{id_cart}")
+    public ResponseEntity<String> deleteItemCart(@PathVariable("id_cart") String id) {
         Cart cart = cartRepository.findById(id).orElseThrow(() -> new RuntimeException("Cart not found with ID: " + id));
 
         cartRepository.delete(cart);
 
-        return ResponseEntity.status(HttpStatus.OK).body(cart.getProduct().getName_product() + " deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(cart.getProduct().getName_product() + " Successfully deleted");
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @DeleteMapping("/clear/{fk_client}")
+    public ResponseEntity<String> clearCart(@PathVariable("fk_client") String id) {
+        cartRepository.deleteByClientId(id);
+
+
+        return ResponseEntity.status(HttpStatus.OK).body("Cart successfully cleaned");
     }
 }
