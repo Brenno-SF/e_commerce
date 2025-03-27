@@ -55,7 +55,7 @@ public class CartController {
         cart.setAdded_at(LocalDateTime.now());
         cartRepository.save(cart);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("The " + cart + " has been successfully saved");
+        return ResponseEntity.status(HttpStatus.CREATED).body("The " + cart.getProduct().getName_product() + " has been successfully saved");
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
