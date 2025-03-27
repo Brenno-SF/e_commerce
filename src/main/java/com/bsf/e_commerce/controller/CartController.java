@@ -59,18 +59,16 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cart + " saved successfully");
     }
 
-//    @CrossOrigin(origins = "*", allowedHeaders = "*")
-//    @PutMapping("/{id_cart}")
-//    public ResponseEntity<String> updateClient(@PathVariable String id_cart, @RequestBody ClientRequestDTO data) {
-//
-//        Cart cart = cartRepository.findById(id_cart).orElseThrow(() -> new RuntimeException("Client not found"));
-//
-//        cart.;
-//
-//        cartRepository.save(cart);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(cart.getProduct().getName_product() + " updated successfully");
-//
-//    }
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PutMapping("/{id_cart}")
+    public ResponseEntity<String> updateCartItem(@PathVariable String id_cart, @RequestBody CartRequestDTO cartRequestDTO) {
+        Cart cart = cartRepository.findById(id_cart).orElseThrow(() -> new RuntimeException("Product in cart not found"));
+
+        cart.setQuantity(cartRequestDTO.quantity());
+
+        cartRepository.save(cart    );
+        return ResponseEntity.status(HttpStatus.OK).body(cart.getProduct().getName_product() + " successfully updated");
+    }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("item/{id_cart}")
@@ -79,14 +77,13 @@ public class CartController {
 
         cartRepository.delete(cart);
 
-        return ResponseEntity.status(HttpStatus.OK).body(cart.getProduct().getName_product() + " Successfully deleted");
+        return ResponseEntity.status(HttpStatus.OK).body(cart.getProduct().getName_product() + " successfully deleted");
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/clear/{fk_client}")
     public ResponseEntity<String> clearCart(@PathVariable("fk_client") String id) {
         cartRepository.deleteByClientId(id);
-
 
         return ResponseEntity.status(HttpStatus.OK).body("Cart successfully cleaned");
     }
