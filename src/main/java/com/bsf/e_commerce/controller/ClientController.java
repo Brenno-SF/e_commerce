@@ -28,7 +28,7 @@ public class ClientController {
         clientData.setAddress(address);
 
         repository.save(clientData);
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientData.getUsername() + " saved successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("The " + clientData.getUsername() + " has been successfully saved");
     }
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
@@ -53,7 +53,7 @@ public class ClientController {
 
 
         repository.save(client);
-        return ResponseEntity.status(HttpStatus.CREATED).body(client.getUsername() + " updated successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("The "+client.getUsername() + " has been successfully updated");
 
     }
 
@@ -64,7 +64,7 @@ public class ClientController {
 
         repository.delete(client);
 
-        return ResponseEntity.status(HttpStatus.OK).body(client.getUsername() + " deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("The "+ client.getUsername() + " has been successfully deleted");
     }
 
 }

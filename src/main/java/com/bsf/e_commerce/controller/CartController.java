@@ -7,7 +7,6 @@ import com.bsf.e_commerce.repository.CartRepository;
 import com.bsf.e_commerce.repository.ClientRepository;
 import com.bsf.e_commerce.repository.ProductRepository;
 import com.bsf.e_commerce.request.CartRequestDTO;
-import com.bsf.e_commerce.request.ClientRequestDTO;
 import com.bsf.e_commerce.response.CartResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,18 +55,18 @@ public class CartController {
         cart.setAdded_at(LocalDateTime.now());
         cartRepository.save(cart);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(cart + " saved successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("The " + cart + " has been successfully saved");
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PutMapping("/{id_cart}")
     public ResponseEntity<String> updateCartItem(@PathVariable String id_cart, @RequestBody CartRequestDTO cartRequestDTO) {
-        Cart cart = cartRepository.findById(id_cart).orElseThrow(() -> new RuntimeException("Product in cart not found"));
+        Cart cart = cartRepository.findById(id_cart).orElseThrow(() -> new RuntimeException("Product not found in cart"));
 
         cart.setQuantity(cartRequestDTO.quantity());
 
-        cartRepository.save(cart    );
-        return ResponseEntity.status(HttpStatus.OK).body(cart.getProduct().getName_product() + " successfully updated");
+        cartRepository.save(cart);
+        return ResponseEntity.status(HttpStatus.OK).body("The "+ cart.getProduct().getName_product() + " has been successfully updated");
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -77,7 +76,7 @@ public class CartController {
 
         cartRepository.delete(cart);
 
-        return ResponseEntity.status(HttpStatus.OK).body(cart.getProduct().getName_product() + " successfully deleted");
+        return ResponseEntity.status(HttpStatus.OK).body("The "+cart.getProduct().getName_product() + " has been successfully deleted");
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -85,6 +84,6 @@ public class CartController {
     public ResponseEntity<String> clearCart(@PathVariable("fk_client") String id) {
         cartRepository.deleteByClientId(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Cart successfully cleaned");
+        return ResponseEntity.status(HttpStatus.OK).body("Cart has been successfully cleaned");
     }
 }
