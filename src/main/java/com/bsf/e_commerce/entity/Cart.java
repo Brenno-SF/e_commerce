@@ -2,6 +2,7 @@ package com.bsf.e_commerce.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -24,6 +25,7 @@ public class Cart {
     @JoinColumn(name="fk_product",nullable = false)
     private Product product;
 
+    @CreationTimestamp
     private LocalDateTime added_at;
     private int quantity;
     }

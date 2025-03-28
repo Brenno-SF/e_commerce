@@ -4,6 +4,7 @@ import com.bsf.e_commerce.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -40,5 +41,6 @@ public class Order {
     @Column(nullable = false)
     private OrderStatus order_status;
 
+    @CreationTimestamp
     private LocalDateTime order_date;
 }
