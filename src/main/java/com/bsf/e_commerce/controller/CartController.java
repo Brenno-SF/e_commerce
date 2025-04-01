@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,7 +30,7 @@ public class CartController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
-    public ResponseEntity<List<CartResponseDTO>> getAll(){
+    public ResponseEntity<List<CartResponseDTO>> getAllCarts(){
         List<CartResponseDTO> cart = cartRepository.findAll().stream().map(CartResponseDTO::new).collect(Collectors.toList());;
         return ResponseEntity.ok(cart);
     }
@@ -45,12 +46,16 @@ public class CartController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     public ResponseEntity<String> saveCart(@RequestBody CartRequestDTO data){
-        Client client = clientRepository.findById(data.client().getIdClient()).orElseThrow(() -> new RuntimeException("Client not found"));
-        Product product = productRepository.findById(data.product().getId_product()).orElseThrow(() -> new RuntimeException("Product not found"));
-
+        Optional<Cart> existingCartItem = cartRepository.findByClientAndProduct(data.client(), data.product());
+        if (existingCartItem.isPresent()) {
+            Cart cart = existingCartItem.get();
+            cart.setQuantity(cart.getQuantity() + data.quantity());
+            cartRepository.save(cart);
+            return ResponseEntity.ok("The quantity of the "+ cart.getProduct().getName_product()+ " has been successfully updated..");
+        }
         Cart cart = new Cart();
-        cart.setClient(client);
-        cart.setProduct(product);
+        cart.setClient(data.client());
+        cart.setProduct(data.product());
         cart.setQuantity(data.quantity());
         cart.setAdded_at(LocalDateTime.now());
         cartRepository.save(cart);
