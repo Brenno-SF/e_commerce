@@ -1,15 +1,23 @@
 package com.bsf.e_commerce.controller;
 
 import com.bsf.e_commerce.entity.Address;
+import com.bsf.e_commerce.entity.Cart;
 import com.bsf.e_commerce.entity.Client;
+import com.bsf.e_commerce.entity.Order;
+import com.bsf.e_commerce.enums.OrderStatus;
+import com.bsf.e_commerce.repository.CartRepository;
 import com.bsf.e_commerce.repository.ClientRepository;
+import com.bsf.e_commerce.repository.OrderRepository;
 import com.bsf.e_commerce.request.ClientRequestDTO;
+import com.bsf.e_commerce.request.OrderRequestDTO;
 import com.bsf.e_commerce.response.ClientResponseDTO;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 

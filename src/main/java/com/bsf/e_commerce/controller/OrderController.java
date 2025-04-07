@@ -52,10 +52,7 @@ public class OrderController {
         order.setOrder_status(OrderStatus.PENDING);
         Order savedOrder = orderRepository.save(order);
 
-//        for (Cart cart : cartItems) {
-//            cart.setOrder(order);
-//        }
-//        order.setCartItems(cartItems);
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedOrder);
     }
