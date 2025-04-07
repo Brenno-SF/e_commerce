@@ -8,5 +8,5 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record OrderRequestDTO(String id_order, Client client, List<Cart> carts, BigDecimal total_price, String payment_method, OrderStatus order_status, LocalDateTime order_date) {
+public record OrderRequestDTO(Client client, List<Cart> carts, BigDecimal total_price, String payment_method, OrderStatus order_status, LocalDateTime order_date) {
 }

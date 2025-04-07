@@ -37,8 +37,8 @@ public class CartController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/{fk_client}")
-    public ResponseEntity<List<CartResponseDTO>> getByIdClient(@PathVariable String fk_client){
-        List<CartResponseDTO> cart = cartRepository.findByClientId(fk_client);
+    public ResponseEntity<List<Cart>> getByIdClient(@PathVariable String fk_client){
+        List<Cart> cart = cartRepository.findByClientId(fk_client);
 
         return ResponseEntity.ok(cart);
     }

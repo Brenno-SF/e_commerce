@@ -25,6 +25,7 @@ public class Cart {
     @JoinColumn(name="fk_product",nullable = false)
     private Product product;
 
+
     @CreationTimestamp
     private LocalDateTime added_at;
     private int quantity;
