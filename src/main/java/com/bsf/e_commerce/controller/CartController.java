@@ -1,7 +1,6 @@
 package com.bsf.e_commerce.controller;
 
 import com.bsf.e_commerce.entity.Cart;
-import com.bsf.e_commerce.entity.Client;
 import com.bsf.e_commerce.entity.Product;
 import com.bsf.e_commerce.repository.CartRepository;
 import com.bsf.e_commerce.repository.ClientRepository;
@@ -45,18 +44,24 @@ public class CartController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
-    public ResponseEntity<String> saveCart(@RequestBody CartRequestDTO data){
-        Optional<Cart> existingCartItem = cartRepository.findByClientAndProduct(data.client(), data.product());
+    public ResponseEntity<String> saveCart(@RequestBody CartRequestDTO cartRequestDTO){
+        Optional<Product> productOptional = productRepository.findById(cartRequestDTO.product().getId_product());
+        if (productOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
+        }
+        Product product = productOptional.get();
+
+        Optional<Cart> existingCartItem = cartRepository.findByClientAndProduct(cartRequestDTO.client(), cartRequestDTO.product());
         if (existingCartItem.isPresent()) {
             Cart cart = existingCartItem.get();
-            cart.setQuantity(cart.getQuantity() + data.quantity());
+            cart.setQuantity(cart.getQuantity() + cartRequestDTO.quantity());
             cartRepository.save(cart);
             return ResponseEntity.ok("The quantity of the "+ cart.getProduct().getName_product()+ " has been successfully updated..");
         }
         Cart cart = new Cart();
-        cart.setClient(data.client());
-        cart.setProduct(data.product());
-        cart.setQuantity(data.quantity());
+        cart.setClient(cartRequestDTO.client());
+        cart.setProduct(product);
+        cart.setQuantity(cartRequestDTO.quantity());
         cart.setAdded_at(LocalDateTime.now());
         cartRepository.save(cart);
 
