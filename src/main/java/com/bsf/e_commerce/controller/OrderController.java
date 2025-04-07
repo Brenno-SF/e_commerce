@@ -10,6 +10,8 @@ import com.bsf.e_commerce.repository.ClientRepository;
 import com.bsf.e_commerce.repository.OrderRepository;
 import com.bsf.e_commerce.request.OrderRequestDTO;
 import com.bsf.e_commerce.response.CartResponseDTO;
+import com.bsf.e_commerce.response.ClientResponseDTO;
+import com.bsf.e_commerce.response.OrderResponseDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("order")
@@ -55,6 +58,12 @@ public class OrderController {
 
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedOrder);
+    }
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping
+    public ResponseEntity<List<OrderResponseDTO>> getAll(){
+        List<OrderResponseDTO> orders = orderRepository.findAll().stream().map(OrderResponseDTO::new).collect(Collectors.toList());;
+        return ResponseEntity.ok(orders);
     }
 
 }
