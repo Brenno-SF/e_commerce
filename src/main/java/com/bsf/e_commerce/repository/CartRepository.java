@@ -3,7 +3,6 @@ package com.bsf.e_commerce.repository;
 import com.bsf.e_commerce.entity.Cart;
 import com.bsf.e_commerce.entity.Client;
 import com.bsf.e_commerce.entity.Product;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
