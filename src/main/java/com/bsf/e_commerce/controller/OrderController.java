@@ -72,4 +72,14 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
 
+    @PatchMapping("/{id_order}/status")
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable String id_order, @RequestParam OrderStatus status) {
+        return orderRepository.findById(id_order).map(order -> {
+            order.setOrder_status(status);
+            orderRepository.save(order);
+            return ResponseEntity.ok(order);
+        }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
 }
