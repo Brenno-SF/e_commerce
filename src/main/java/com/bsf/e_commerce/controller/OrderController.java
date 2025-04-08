@@ -81,5 +81,14 @@ public class OrderController {
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping("/{id_order}")
+    public ResponseEntity<String> deleteOrder(@PathVariable String id_order) {
+
+        Order order = orderRepository.findById(id_order).orElseThrow(() -> new RuntimeException("Order not found with ID: " + id_order));
+
+        orderRepository.delete(order);
+        return ResponseEntity.status(HttpStatus.OK).body("The "+ order.getClient().getUsername() + " order has been successfully deleted");
+    }
+
 
 }
