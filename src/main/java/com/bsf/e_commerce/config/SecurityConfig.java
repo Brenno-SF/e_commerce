@@ -1,4 +1,4 @@
-package com.bsf.e_commerce;
+package com.bsf.e_commerce.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
