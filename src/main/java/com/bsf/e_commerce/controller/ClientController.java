@@ -15,6 +15,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -26,12 +27,17 @@ import java.util.stream.Collectors;
 public class ClientController {
     @Autowired
     private ClientRepository repository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     public ResponseEntity<String> saveClient(@RequestBody ClientRequestDTO data) {
         Client clientData = new Client(data);
         Address address = new Address(data.address());
+
+        String encryptedPassword = passwordEncoder.encode(clientData.getPassword());
+        clientData.setPassword(encryptedPassword);
 
         clientData.setAddress(address);
 
