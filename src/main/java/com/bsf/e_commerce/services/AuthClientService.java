@@ -16,16 +16,21 @@ public class AuthClientService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    void execute(AuthLoginRequestDTO authLoginRequestDTO) throws AuthenticationException {
-        var client = this.clientRepository.findByUsername(authLoginRequestDTO.username())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    public Object execute(AuthLoginRequestDTO authLoginRequestDTO) throws AuthenticationException {
+        var client = this.clientRepository
+                .findByUsername(authLoginRequestDTO.username())
+                .orElseThrow(() -> new UsernameNotFoundException("Username/Password incorrect"));
+
 
 
         var passwordMatches = this.passwordEncoder.matches(authLoginRequestDTO.password(), client.getPassword());
 
         if (!passwordMatches) {
             throw new AuthenticationException();
+        }else{
+            System.out.println("bateu saporra");
         }
+        return client;
     }
 
 }
