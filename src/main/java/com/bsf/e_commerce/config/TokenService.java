@@ -6,6 +6,8 @@ import com.bsf.e_commerce.entity.Client;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+
 @Component
 public class TokenService {
     @Value("${jwt.secret}")
@@ -17,7 +19,10 @@ public class TokenService {
         return JWT.create()
                 .withSubject(client.getUsername())
                 .withClaim("clientId", client.getIdClient())
-                .withClaim("nameClienet", client.getName_client())
-                .withClaim()
+                .withClaim("name", client.getName_client())
+                .withExpiresAt(Instant.now().plusSeconds(86400))
+                .withIssuedAt(Instant.now())
+                .withIssuer("API E-commerce")
+                .sign(algorithm);
     }
 }

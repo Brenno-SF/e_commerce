@@ -20,7 +20,7 @@ public class AuthLoginUserController {
     private AuthClientService authClientService;
 
     @PostMapping("client")
-    public ResponseEntity<Object> create(@RequestBody AuthLoginRequestDTO authLoginRequestDTO){
+    public ResponseEntity<String> create(@RequestBody AuthLoginRequestDTO authLoginRequestDTO){
         try {
              var result = this.authClientService.execute(authLoginRequestDTO);
              return ResponseEntity.ok().body(result);
