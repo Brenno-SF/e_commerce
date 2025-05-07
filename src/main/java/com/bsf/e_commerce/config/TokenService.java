@@ -25,4 +25,8 @@ public class TokenService {
                 .withIssuer("API E-commerce")
                 .sign(algorithm);
     }
+
+    public void verifyToken(String token){
+        Algorithm algorithm = Algorithm
+    }
 }

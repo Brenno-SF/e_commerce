@@ -1,6 +1,7 @@
 package com.bsf.e_commerce.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,12 +11,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
+    @Autowired
+    private SecurityFilter securityFilter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity
@@ -25,6 +28,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/client").permitAll()
                         .requestMatchers(HttpMethod.POST, "auth/client").permitAll()
                         .anyRequest().authenticated())
+                .addFilterBefore(securityFilter, BasicAuthenticationFilter.class)
                 .build();
 
     }

@@ -6,7 +6,6 @@ import com.bsf.e_commerce.config.TokenService;
 import com.bsf.e_commerce.repository.ClientRepository;
 import com.bsf.e_commerce.request.AuthLoginRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +23,11 @@ public class AuthClientService {
                 .findByUsername(authLoginRequestDTO.username())
                 .orElseThrow(() -> new AuthenticationException("Username/Password incorrect"));
 
-
         var passwordMatches = this.passwordEncoder.matches(authLoginRequestDTO.password(), client.getPassword());
 
         if (!passwordMatches) throw new AuthenticationException(("Username/Password incorrect"));
 
-        String token = tokenService.generateToken(client);
-        return token;
+        return tokenService.generateToken(client);
     }
 
 }
