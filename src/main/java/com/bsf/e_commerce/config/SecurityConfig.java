@@ -26,11 +26,11 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/client").permitAll()
-                        .requestMatchers(HttpMethod.POST, "auth/client").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers(HttpMethod.POST, "/auth/client").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .addFilterBefore(securityFilter, BasicAuthenticationFilter.class)
                 .build();
-
     }
 
     @Bean
